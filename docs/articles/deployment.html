@@ -72,10 +72,10 @@
 <ol>
 <li><strong>GitHub OAuth</strong>
 <ul>
-<li>System is connected to GitHub as OAuth application. User signs into system using GitHub account, so that system can interact with user's repositories.</li>
+<li>System is connected to GitHub as OAuth application. User sings into system using GitHub account, so that system can interact with user's repositories.</li>
 <li>OAuth app needs to be created in GitHub (<a href="https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app">Tutorial</a>).
 <ul>
-<li>Callback url should be set to: (<code>homepage-url/signin-github</code>)</li>
+<li>Callback url should be set to: (<code>homepage-url/signin-github</code>).</li>
 <li><em>Client ID</em> and <em>Client secret</em> will be used later on.</li>
 </ul>
 </li>
@@ -83,7 +83,7 @@
 <ul>
 <li>For localhost, it's also required to add <em>Client ID</em> and <em>Client secret</em> into <em>User Secrets</em> in <em>CCMS</em> project (<a href="https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-5.0&amp;tabs=windows">Tutorial</a>).
 <ul>
-<li>Name for <em>Client ID</em> secret is <code>ClientId</code> and name for <em>Client secret</em> is <code>ClientSecret</code></li>
+<li>Name for <em>Client ID</em> secret is <code>ClientId</code> and name for <em>Client secret</em> is <code>ClientSecret</code>.</li>
 </ul>
 </li>
 </ul>
@@ -106,7 +106,7 @@
 <li>Name for <em>Connection String</em> is <code>ConnectionString</code>.</li>
 </ul>
 </li>
-<li>Update database from migration using <code>update-database</code> command in Package Manager Console in <em>CCMS.BL</em> project.</li>
+<li>Update database from migration using <code>update-database</code> command in Package Manager Console in <em>CCMS.DAL</em> project.</li>
 </ul>
 </li>
 <li><strong>Key vault</strong>
@@ -126,7 +126,7 @@
 <li>Connect app service to key vault.
 <ul>
 <li>Generate identity for the app service in <em>Identity</em> page. Copy <em>Object ID</em>.</li>
-<li>Add new access policy in the key vault in <em>Access policies</em> page, as principal select <em>Object ID</em> from last step.</li>
+<li>Add new access policy in the key vault in <em>Access policies</em> page, for principal select <em>Object ID</em> from last step.</li>
 <li>Add <em>Get</em> and <em>List</em> permisions for secrets to the app.</li>
 </ul>
 </li>
@@ -134,7 +134,7 @@
 </li>
 <li><strong>Publish</strong>
 <ul>
-<li>Publish app to App service
+<li>Publish app to App service.
 <ul>
 <li>Recommend using Visual Studio - right click <em>CCMS</em> project and click on <em>Publish</em> button.</li>
 </ul>
