@@ -1,0 +1,64 @@
+﻿@page "/repositories"
+
+@inject RepositoriesViewModel repositoriesViewModel
+@attribute [Authorize]
+
+<Loader IsLoaded="@IsLoaded">
+    <div class="row">
+        <div class="col">
+            <h1>Available Repositories</h1>
+        </div>
+        <div class="col">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <div class="mr-2 mb-1">
+                </div>
+                <div class="d-flex flex-grow-1">
+                    <RadzenAutoComplete Data="@repositoriesViewModel.AllRepositories" TextProperty="FullName" FilterOperator="StringFilterOperator.Contains" Placeholder="Search..." Class="w-100" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterDelay="100" Change="@(OnChange)"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div hidden="@(!repositoriesViewModel.VisibleRepositories.Any())">
+        <RepositoriesListComponent></RepositoriesListComponent>
+    </div>
+    <p hidden="@(repositoriesViewModel.VisibleRepositories.Any())">Sorry, there are no repositories to show.</p>
+    <RadzenPager Count="repositoriesViewModel.FilteredRepositories.Count()" PageSize="@repositoriesViewModel.PageSize" PageChanged="@PageChanged"/>
+</Loader>
+
+@code {
+
+    public bool IsLoaded { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        repositoriesViewModel.PropertyChanged += (_, e) =>
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(repositoriesViewModel.AllRepositories):
+                case nameof(repositoriesViewModel.VisibleRepositories):
+                case nameof(repositoriesViewModel.FilteredRepositories):
+                case nameof(repositoriesViewModel.PageSize):
+                    StateHasChanged();
+                    break;
+            }
+        };
+
+        await repositoriesViewModel.InitializeRepositories();
+        await base.OnInitializedAsync();
+        IsLoaded = true;
+    }
+
+    private void PageChanged(PagerEventArgs args)
+    {
+        repositoriesViewModel.VisibleRepositories = repositoriesViewModel.FilteredRepositories.Skip(args.Skip).Take(args.Top).ToList();
+    }
+
+    private void OnChange(object value)
+    {
+        if (value is not string stringValue)
+            throw new ArgumentOutOfRangeException(nameof(value));
+        repositoriesViewModel.FilteredRepositories = repositoriesViewModel.AllRepositories.Where(r => r.FullName.ToLower().Contains(stringValue.ToLower())).ToList();
+    }
+
+}

@@ -1,0 +1,39 @@
+﻿@inject NavigationManager navigationManager
+@inject UserViewModel userViewModel
+
+<AuthorizeView>
+    <Authorized>
+        <RadzenImage Path="@userViewModel.SelectedUser?.AvatarUrl" Class="rounded-circle" Style="margin-right: 6px; max-height: 32px;">
+        </RadzenImage>
+        <RadzenLink Text="@userViewModel.SelectedUser?.Login" Path="@userViewModel.SelectedUser?.HtmlUrl" Style="color: rgb(13, 15, 16); margin-right: 12px;">
+        </RadzenLink>
+        <RadzenButton Style="margin-right: 12px;" Text="Sign out" Click="@SignOut" Icon="logout">
+        </RadzenButton>
+    </Authorized>
+    <NotAuthorized>
+        <RadzenButton Style="margin-right: 12px" Text="Sign in" Click="@SignIn" Icon="login"></RadzenButton>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        userViewModel.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(userViewModel.SelectedUser)) StateHasChanged();
+        };
+        await base.OnInitializedAsync();
+    }
+
+    private void SignOut()
+    {
+        navigationManager.NavigateTo("signout", true);
+    }
+
+    private void SignIn()
+    {
+        navigationManager.NavigateTo("signin", true);
+    }
+
+}

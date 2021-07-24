@@ -1,0 +1,130 @@
+﻿@using CCMS.BL.Services.EditorConfig.Enums
+@using System.Threading
+@inject CheckerViewModel checkerViewModel
+
+<Loader IsLoaded="@IsLoaded">
+    @if (checkerViewModel.AllChecks.Any())
+    {
+        <RadzenDataList Data="@checkerViewModel.VisibleCheck" WrapItems="true" TItem="RepositoryCheckListModel" class="w-100">
+            <Template Context="check">
+                <div class="row border-0 m-0 p-0 shadow-none mb-2">
+                    <RadzenCard class="overflow-auto mb-2 w-100" style="height: 400px">
+                        <div class="d-flex align-content-center align-items-center text-muted mb-2">
+                            <a href="@check.CreatedBy.HtmlUrl" Style="color: rgb(13, 15, 16);" class="mr-1">
+                                <RadzenImage Path="@check.CreatedBy.AvatarUrl" Class="rounded-circle" Style="max-height: 20px;">
+                                </RadzenImage>@check.CreatedBy.Login
+                            </a>
+                            <label class="mr-1">@check.CreatedAt.ToLocalTime().DateTime.ToFriendlyTimeSpan()</label>
+                        </div>
+                        <RadzenDataList Data="@check.ConventionChecks" WrapItems="true" TItem="ConventionCheckListModel" class="w-100">
+                            <Template Context="result">
+                                <div class="row border-0 m-0 p-0 shadow-none mb-4">
+                                    <p class="h5 mx-2">@result.Title</p>
+                                    <ul class="list-group w-100">
+                                        @foreach (var line in result.Results.OrderBy(c => c.LineId))
+                                        {
+                                            @if (line.State == ECheckState.Success)
+                                            {
+                                                <li class="list-group-item list-group-item-success p-0 m-0 border-0">
+                                                    <p class="mx-2" style="overflow-wrap: anywhere">@line.Line</p>
+                                                </li>
+                                            }
+                                            else if (line.State == ECheckState.Fail)
+                                            {
+                                                <li class="list-group-item list-group-item-danger p-0 m-0 border-0">
+                                                    <a data-toggle="collapse" href="#@GetCollapseId(result, line.LineId)" aria-expanded="false" aria-controls="collapseExample">
+
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <p class="list-group-item-danger mx-2" style="overflow-wrap: anywhere">@line.Line</p>
+                                                            </div>
+                                                            <div class="col-auto mx-2">
+                                                                <ExpandImage></ExpandImage>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <div class="collapse" id="@GetCollapseId(result, line.LineId)">
+                                                        <div class="card card-body text-muted m-2 p-0">
+                                                            <p class="mx-2" style="white-space: pre-line; overflow-wrap: anywhere;">@line.Message</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            }
+                                            else if (!string.IsNullOrEmpty(line.Line))
+                                            {
+                                                <li class="list-group-item p-0 m-0 border-0">
+                                                    <p class="mx-2 text-muted" style="overflow-wrap: anywhere">@line.Line</p>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                            </Template>
+                        </RadzenDataList>
+                    </RadzenCard>
+                </div>
+            </Template>
+        </RadzenDataList>
+    }
+    else
+    {
+    <div class="text-muted">
+        <RadzenLabel Text="Sorry, there is no history to show."></RadzenLabel>
+    </div>
+    }
+    <RadzenPager Count="checkerViewModel.AllChecks.Count()" PageSize="@checkerViewModel.PageSize" PageChanged="@PageChanged"/>
+    <div class="text-right mt-2">
+        <RadzenButton Text="Cancel" Click="Close" ButtonStyle="ButtonStyle.Light" Image="images/close.png" Style="margin-bottom: 10px; width: 150px"/>
+    </div>
+</Loader>
+
+
+@code {
+
+    [Parameter]
+    public DialogService DialogService { get; set; }
+
+    public bool IsLoaded { get; set; }
+
+    public bool IsClosed { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        checkerViewModel.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(checkerViewModel.AllChecks)) StateHasChanged();
+            if (e.PropertyName == nameof(checkerViewModel.VisibleCheck)) StateHasChanged();
+        };
+
+        await base.OnInitializedAsync();
+    }
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            await checkerViewModel.UpdateChecksHistory();
+            IsLoaded = true;
+            StateHasChanged();
+        }
+    }
+
+    private void Close()
+    {
+        if (IsClosed) return;
+        IsClosed = true;
+        DialogService.Close();
+    }
+
+    private void PageChanged(PagerEventArgs args)
+    {
+        checkerViewModel.VisibleCheck = checkerViewModel.AllChecks.Skip(args.Skip).Take(args.Top).ToList();
+    }
+
+    private object GetCollapseId(ConventionCheckListModel result, int lineId)
+    {
+        return "id" + result.Id + lineId;
+    }
+}

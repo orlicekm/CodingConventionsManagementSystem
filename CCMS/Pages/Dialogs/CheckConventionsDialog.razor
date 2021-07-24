@@ -1,0 +1,169 @@
+﻿@using CCMS.BL.Services.EditorConfig.Enums
+@inject RepositoryViewModel repositoryViewModel
+@inject CheckerViewModel checkerViewModel
+
+<Loader IsLoaded="@IsLoaded">
+    <RadzenSteps Change="s => checkerViewModel.StepChanged(s)">
+        <Steps>
+            <RadzenStepsItem Text="Settings" Disabled="@(!(checkerViewModel.Step == -1 && checkerViewModel.NextStepAllowed))">
+                <RadzenCard class="overflow-auto mb-2" style="height: 400px">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <RadzenLabel Text="Branch" /><br />
+                            <RadzenDropDown TValue="string" AllowVirtualization="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                            AllowFiltering="true" Data="@Branches" TextProperty="Name" ValueProperty="Name" @bind-Value="@checkerViewModel.SelectedBranch" />
+                        </div>
+                    </div>
+                    <RadzenLabel Text="Conventions" class="mt-2" />
+                    <div class="row w-100 border-0 m-0 p-0 justify-content-md-start shadow-none">
+                        @if (checkerViewModel.SelectedRepository.Conventions.Any())
+                        {
+                            <RadzenCheckBoxList @bind-Value="@checkerViewModel.SelectedConventions" TValue= "ConventionListModel" Orientation="Orientation.Vertical"
+                                                Data="@checkerViewModel.SelectedRepository.Conventions" TextProperty="Title" ValueProperty="Convention" Change=@checkerViewModel.SelectedConventionsChanged />
+                        }
+                        else
+                        {
+                            <div class="text-muted">
+                                <RadzenLabel Text="Sorry, there are no conventions to check."></RadzenLabel>
+                            </div>
+                        }
+                    </div>
+                </RadzenCard>
+            </RadzenStepsItem>
+            <RadzenStepsItem Text="Execution" Disabled="@(!(checkerViewModel.Step == 0 && checkerViewModel.NextStepAllowed))">
+                <RadzenCard class="overflow-auto mb-2" style="height: 400px">
+                    <RadzenDataList Data="@checkerViewModel.ExecuteMessages" WrapItems="true" TItem="ExecuteMessageObservable">
+                        <Template Context="executeMessage">
+                            <div class="d-flex align-content-center align-items-center border-0 m-1 p-0 w-100 shadow-none">
+                                <div class="text-center" hidden="@(executeMessage.State != ExecuteMessageObservable.EState.Running)" style="height: 24px; width: 24px">
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                </div>
+                                <div hidden="@(executeMessage.State != ExecuteMessageObservable.EState.Success)" style="height: 24px; width: 24px">
+                                    <SuccessCircleImage></SuccessCircleImage>
+                                </div>
+                                <div hidden="@(executeMessage.State != ExecuteMessageObservable.EState.Fail)" style="height: 24px; width: 24px">
+                                    <FailCircleImage></FailCircleImage>
+                                </div>
+                                <p class="pl-1">@executeMessage.Text</p>
+                            </div>
+                        </Template>
+                    </RadzenDataList>
+                </RadzenCard>
+            </RadzenStepsItem>
+            <RadzenStepsItem Text="Results" Disabled="@(!(checkerViewModel.Step == 1 && checkerViewModel.NextStepAllowed))">
+                <RadzenCard class="overflow-auto mb-2" style="height: 400px; max-height: 400px">
+                    <RadzenDataList Data="@checkerViewModel.Results" WrapItems="true" TItem="ConventionCheckListModel" class="w-100">
+                        <Template Context="result">
+                            <div class="row border-0 m-0 p-0 shadow-none mb-4">
+                                <p class="h5 mx-2">@result.Title</p>
+                                <ul class="list-group w-100">
+                                    @foreach (var line in result.Results.OrderBy(c => c.LineId))
+                                    {
+                                        @if (line.State == ECheckState.Success)
+                                        {
+                                            <li class="list-group-item list-group-item-success p-0 m-0 border-0">
+                                                <p class="mx-2" style="overflow-wrap: anywhere">@line.Line</p>
+                                            </li>
+                                        }
+                                        else if (line.State == ECheckState.Fail)
+                                        {
+                                            <li class="list-group-item list-group-item-danger p-0 m-0 border-0">
+                                                <a data-toggle="collapse" href="#@GetCollapseId(result, line.LineId)" aria-expanded="false" aria-controls="collapseExample">
+
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <p class="list-group-item-danger mx-2" style="overflow-wrap: anywhere">@line.Line</p>
+                                                        </div>
+                                                        <div class="col-auto mx-2">
+                                                            <ExpandImage></ExpandImage>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <div class="collapse" id="@GetCollapseId(result, line.LineId)">
+                                                    <div class="card card-body text-muted m-2 p-0">
+                                                        <p  class="mx-2" style="white-space: pre-line; overflow-wrap: anywhere;">@line.Message</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                        else if(!string.IsNullOrEmpty(line.Line))
+                                        {
+                                            <li class="list-group-item p-0 m-0 border-0">
+                                                <p class="mx-2 text-muted" style="overflow-wrap: anywhere">@line.Line</p>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </Template>
+                    </RadzenDataList>
+                </RadzenCard>
+            </RadzenStepsItem>
+        </Steps>
+    </RadzenSteps>
+    <div class="text-right mt-2">
+        <RadzenButton Text="Close" Click="Close" ButtonStyle="ButtonStyle.Light" Image="images/close.png" Style="margin-bottom: 10px; width: 150px" />
+    </div>
+</Loader>
+
+
+@code {
+
+    [Parameter]
+    public DialogService DialogService { get; set; }
+
+    public bool IsLoaded { get; set; }
+
+    public bool IsClosed { get; set; }
+
+    private ICollection<BranchListModel> Branches { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        checkerViewModel.PropertyChanged += (_, e) =>
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(checkerViewModel.SelectedBranch):
+                case nameof(checkerViewModel.NextStepAllowed):
+                case nameof(checkerViewModel.Step):
+                case nameof(checkerViewModel.SelectedConventions):
+                case nameof(checkerViewModel.SelectedRepository):
+                case nameof(checkerViewModel.ExecuteMessages):
+                case nameof(checkerViewModel.Results):
+                    StateHasChanged();
+                    break;
+            }
+        };
+
+        checkerViewModel.ExecuteMessages.CollectionChanged += (_, _) => StateHasChanged();
+        checkerViewModel.Reset();
+        
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            Branches = await repositoryViewModel.GetBranches();
+            checkerViewModel.SelectedBranch = Branches.FirstOrDefault()?.Name;
+            IsLoaded = true;
+            StateHasChanged();
+        }
+    }
+
+    private void Close()
+    {
+        if (IsClosed) return;
+        IsClosed = true;
+        checkerViewModel.Close();
+        DialogService.Close();
+    }
+
+    private object GetCollapseId(ConventionCheckListModel result, int lineId)
+    {
+        return "id" + result.Id + lineId;
+    }
+}

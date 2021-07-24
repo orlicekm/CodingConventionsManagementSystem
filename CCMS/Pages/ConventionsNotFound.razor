@@ -1,0 +1,32 @@
+﻿@page "/repository"
+
+@inject RepositoryViewModel repositoryViewModel
+@inject NavigationManager navigationManager
+
+@attribute [Authorize]
+
+
+<h1>Sorry</h1>
+<p>
+    You need to select repository to manage coding conventions. <br/>
+    <RadzenButton Click="@NavigateToRepositories" Text="Repositories" Icon="inventory" ButtonStyle="ButtonStyle.Secondary"/>
+</p>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (repositoryViewModel.SelectedRepository != null)
+        {
+            navigationManager.NavigateTo($"repository/{repositoryViewModel.SelectedRepository}");
+        }
+
+        await base.OnInitializedAsync();
+    }
+
+    private void NavigateToRepositories()
+    {
+        navigationManager.NavigateTo("repositories");
+    }
+
+}

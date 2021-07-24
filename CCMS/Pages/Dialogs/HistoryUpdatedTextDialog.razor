@@ -1,0 +1,78 @@
+﻿@inject ConventionViewModel conventionViewModel
+
+<Loader IsLoaded="@IsLoaded">
+    <RadzenDataList AllowPaging="false" WrapItems="true" Data="@conventionViewModel.VisibleHistory" TItem="(string, PatchListModel)">
+        <Template Context="patch">
+            <RadzenCard class="overflow-auto mb-2 w-100 mx-0" style="height: 400px">
+                <div class="row text-muted">
+                    <div class="col-auto">
+                        <div class="d-flex align-content-center align-items-center">
+                            <a href="@patch.Item2.CreatedBy.HtmlUrl" Style="color: rgb(13, 15, 16);" class="mr-1">
+                                <RadzenImage Path="@patch.Item2.CreatedBy.AvatarUrl" Class="rounded-circle" Style="max-height: 20px;">
+                                </RadzenImage>@patch.Item2.CreatedBy.Login
+                            </a>
+                            <label class="mr-1">@patch.Item2.CreatedAt.ToLocalTime().DateTime.ToFriendlyTimeSpan()</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-auto">
+                        <p class="mt-2 text-muted">@((MarkupString) patch.Item1)</p>
+                    </div>
+                </div>
+            </RadzenCard>
+        </Template>
+    </RadzenDataList>
+    <RadzenPager Count="conventionViewModel.AllHistory.Count()" PageSize="@conventionViewModel.PageSize" PageChanged="@PageChanged" />
+    <div class="text-right mt-2">
+        <RadzenButton Text="Close" Click="Close" ButtonStyle="ButtonStyle.Light" Image="images/close.png" Style="margin-bottom: 10px; width: 150px" />
+    </div>
+</Loader>
+
+@code {
+
+    [Parameter]
+    public DialogService DialogService { get; set; }
+
+    [Parameter]
+    public EUpdatedText UpdatedText { get; set; }
+
+    public bool IsLoaded { get; set; }
+
+    public bool IsClosed { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        conventionViewModel.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(conventionViewModel.AllHistory)) StateHasChanged();
+        };
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            if (UpdatedText == EUpdatedText.Formal)
+                await conventionViewModel.UpdateFormalHistory();
+            if (UpdatedText == EUpdatedText.Formatted)
+                await conventionViewModel.UpdateFormattedHistory();
+            IsLoaded = true;
+            StateHasChanged();
+        }
+    }
+
+    private void PageChanged(PagerEventArgs args)
+    {
+        conventionViewModel.VisibleHistory = conventionViewModel.AllHistory.Skip(args.Skip).Take(args.Top).ToList();
+    }
+
+    private void Close()
+    {
+        if (IsClosed) return;
+        IsClosed = true;
+        DialogService.Close();
+    }
+}

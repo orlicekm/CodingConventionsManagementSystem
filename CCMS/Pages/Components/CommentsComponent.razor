@@ -1,0 +1,74 @@
+﻿@inject ConventionViewModel conventionViewModel
+
+<div class="mb-2">
+    <div class="row">
+        <div class="col">
+            <h2>Comments</h2>
+        </div>
+    </div>
+    <div hidden="@(!conventionViewModel.SelectedConvention.Comments.Any())">
+        <RadzenDataList AllowPaging="false" WrapItems="true" Data="@conventionViewModel.SelectedConvention.Comments" TItem="CommentListModel">
+            <Template Context="comment">
+                <RadzenCard class="w-100 mx-0">
+                    <div class="row text-muted mb-2">
+                        <div class="col-auto">
+                            <div class="d-flex align-content-center align-items-center">
+                                <a href="@comment.Owner.HtmlUrl" Style="color: rgb(13, 15, 16);" class="mr-1">
+                                    <RadzenImage Path="@comment.Owner.AvatarUrl" Class="rounded-circle" Style="max-height: 20px;">
+                                    </RadzenImage>@comment.Owner.Login
+                                </a>
+                                <label class="mr-1">@comment.CreatedAt.ToLocalTime().DateTime.ToFriendlyTimeSpan()</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto">
+                            <p class="text-muted" style="white-space: pre-line">@comment.Text</p>
+                        </div>
+                    </div>
+                </RadzenCard>
+            </Template>
+        </RadzenDataList>
+    </div>
+    <p hidden="@(conventionViewModel.SelectedConvention.Comments.Any())" class="mb-2">Sorry, there are no conventions to show.</p>
+    <RadzenTextArea class="w-100" Style="width: 300px" @bind-Value="@Text" Placeholder="Comment here..."/>
+    <div class="row">
+        <div class="col">
+            <p class="text-danger" hidden="@(!TextDangerVisibility)">Text cannot be empty!</p>
+        </div>
+        <div class="col">
+            <div class="d-flex justify-content-end">
+                <RadzenButton Style="padding: initial; width: 110px;" Text="Add" Click="@Add" Icon="add" ButtonStyle="ButtonStyle.Primary"></RadzenButton>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code
+{
+    string Text { get; set; }
+    bool TextDangerVisibility { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        conventionViewModel.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(conventionViewModel.SelectedConvention)) StateHasChanged();
+        };
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task Add()
+    {
+        if (string.IsNullOrEmpty(Text))
+        {
+            TextDangerVisibility = true;
+            return;
+        }
+        TextDangerVisibility = false;
+        var tmp = Text;
+        Text = string.Empty;
+        await conventionViewModel.AddComment(tmp);
+    }
+}

@@ -1,0 +1,81 @@
+﻿@inherits LayoutComponentBase
+@inject RepositoryViewModel repositoryViewModel
+<RadzenDialog/>
+<RadzenTooltip/>
+<RadzenHeader>
+    <ChildContent>
+        <div class="row justify-content-start align-items-center">
+            <div class="col-6 d-flex align-items-center">
+                <RadzenSidebarToggle Click="@SidebarToggleClick">
+                </RadzenSidebarToggle>
+                <RadzenLabel Text="Coding Conventions Management System">
+                </RadzenLabel>
+            </div>
+
+            <div class="col-6 text-right">
+                <AccessControl></AccessControl>
+            </div>
+        </div>
+    </ChildContent>
+</RadzenHeader>
+<RadzenBody @ref="body">
+    <ChildContent>
+        <RadzenContentContainer Name="main">
+            <RadzenContent Container="main">
+                <ChildContent>
+                    @Body
+                </ChildContent>
+            </RadzenContent>
+        </RadzenContentContainer>
+    </ChildContent>
+</RadzenBody>
+<RadzenSidebar @ref="sidebar">
+    <ChildContent>
+        <NavigationMenu></NavigationMenu>
+    </ChildContent>
+</RadzenSidebar>
+<RadzenFooter>
+    <ChildContent>
+        <div class="row text-muted">
+            <div class="col-6 d-flex align-items-center">
+                <a href="https://github.com/orlicekm/CodingConventionsManagementSystem" class="mr-1">
+                    <GitHubImage></GitHubImage>
+                </a>
+                <a href="mailto:michal@orlicek.net" class="mr-1">
+                    <MailImage></MailImage>
+                </a>
+                <RadzenLabel Text="Coding Conventions Management System by Michal Orlíček">
+                </RadzenLabel>
+            </div>
+            <div class="col-6 text-right">
+                <RadzenLabel Text="@SelectedRepositoryText">
+                </RadzenLabel>
+            </div>
+        </div>
+    </ChildContent>
+</RadzenFooter>
+
+@code
+{
+    private RadzenBody body;
+    private RadzenSidebar sidebar;
+
+    private string SelectedRepositoryText => repositoryViewModel?.SelectedRepository == null ? "Selected repository: None" : $"Selected repository: {repositoryViewModel.SelectedRepository?.FullName}";
+
+    protected async Task SidebarToggleClick()
+    {
+        await InvokeAsync(() => { sidebar.Toggle(); });
+
+        await InvokeAsync(() => { body.Toggle(); });
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        repositoryViewModel.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(repositoryViewModel.SelectedRepository)) StateHasChanged();
+        };
+
+        await base.OnInitializedAsync();
+    }
+}

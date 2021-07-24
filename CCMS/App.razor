@@ -1,0 +1,37 @@
+@inject UserViewModel userViewModel
+@inject NavigationManager navigationManager
+
+
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(Program).Assembly">
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                <Authorizing>
+                    <p>Determining session state, please wait...</p>
+                </Authorizing>
+                <NotAuthorized>
+                    <h1>Sorry</h1>
+                    <p>You are not authorized to reach this page. You need to sign in.</p>
+                    <AccessControl></AccessControl>
+                </NotAuthorized>
+            </AuthorizeRouteView>
+        </Found>
+        <NotFound>
+            @{ navigationManager.NavigateTo("notfound"); }
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>
+
+@code
+{
+
+    [Parameter]
+    public string AccessToken { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        userViewModel.AccessToken = AccessToken;
+        if (AccessToken != null) await userViewModel.InitUser();
+        await base.OnInitializedAsync();
+    }
+}

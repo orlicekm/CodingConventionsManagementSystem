@@ -1,0 +1,73 @@
+﻿@inject RepositoryViewModel repositoryViewModel
+@inject IJSRuntime js
+
+<RadzenDataList AllowPaging="false" WrapItems="true" Data="@repositoryViewModel.VisibleConventions" TItem="ConventionListModel">
+    <Template Context="convention">
+        <RadzenCard class="w-100 mx-0">
+            <div class="row">
+                <div class="col mb-1">
+                    <RadzenLink Path="@GetConventionPath(convention)" class="h5" Text="@convention.Title"></RadzenLink>
+                </div>
+            </div>
+            <div class="row text-muted">
+                <div class="col-auto">
+                    <div class="d-flex align-content-center align-items-center">
+                        <label class="mr-1">Updated @convention.UpdatedAt.ToLocalTime().DateTime.ToFriendlyTimeSpan() by </label>
+                        <a href="@convention.UpdatedBy?.HtmlUrl" Style="color: rgb(13, 15, 16);">
+                            <RadzenImage Path="@convention.UpdatedBy?.AvatarUrl" Class="rounded-circle" Style="max-height: 20px;">
+                            </RadzenImage>@convention.UpdatedBy?.Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-auto">
+                    <p class="text-muted" hidden="@convention.FormattedText.ToPlainText().ToVisible()">@convention.FormattedText.ToPlainText()</p>
+                </div>
+            </div>
+            <div class="row text-muted">
+                <div class="col-auto" hidden="@convention.Sections.ToVisible()">
+                    <div class="d-flex align-content-center align-items-center" data-toggle="tooltip" data-placement="bottom" title="EditorConfig sections">
+                        <SectionsImage></SectionsImage>
+                        @convention.Sections
+                    </div>
+                </div>
+                <div class="col-auto" hidden="@convention.Properties.ToVisible()">
+                    <div class="d-flex align-content-center align-items-center" data-toggle="tooltip" data-placement="bottom" title="EditorConfig properties">
+                        <PropertiesImage></PropertiesImage>
+                        @convention.Properties
+                    </div>
+                </div>
+                <div class="col-auto" hidden="@convention.Comments.ToVisible()">
+                    <div class="d-flex align-content-center align-items-center" data-toggle="tooltip" data-placement="bottom" title="Comments">
+                        <CommentsImage></CommentsImage>
+                        @convention.Comments
+                    </div>
+                </div>
+            </div>
+        </RadzenCard>
+    </Template>
+</RadzenDataList>
+
+@code {
+
+    private string GetConventionPath(ConventionListModel convention)
+    {
+        return $"/convention/{convention.Id}";
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        repositoryViewModel.PropertyChanged += async (_, e) =>
+        {
+            if (e.PropertyName == nameof(repositoryViewModel.VisibleConventions))
+            {
+                StateHasChanged();
+                await js.InvokeVoidAsync("addTooltips");
+            }
+        };
+
+        await base.OnInitializedAsync();
+    }
+
+}

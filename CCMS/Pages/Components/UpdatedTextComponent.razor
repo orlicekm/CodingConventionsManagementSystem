@@ -1,0 +1,126 @@
+﻿@inject DialogService dialogService
+@inject ConventionViewModel conventionViewModel
+
+<div class="mb-2">
+    <div class="row">
+        <div class="col">
+            @if (UpdatedText == EUpdatedText.Formatted)
+            {
+                <h2>Description</h2>
+            }
+            @if (UpdatedText == EUpdatedText.Formal)
+            {
+                <h2>Properties</h2>
+            }
+        </div>
+        <div class="col">
+            <div class="d-flex justify-content-end">
+                <div class="mr-2">
+                    <RadzenButton Style="margin-right: 4px; padding: initial; width: 110px;" Text="History" Click="@ViewHistory" Icon="history" ButtonStyle="ButtonStyle.Info"></RadzenButton>
+                </div>
+                <div>
+                    @if (UpdatedText == EUpdatedText.Formatted)
+                    {
+                        <RadzenButton Style="padding: initial; width: 110px;" Text="Edit" Click="@(_ => Edit(null))" Icon="edit"></RadzenButton>
+                    }
+                    @if (UpdatedText == EUpdatedText.Formal)
+                    {
+                        <RadzenSplitButton Style="padding: initial; width: 110px;" Text="Edit" Click="@(Edit)" Icon="edit">
+                            <ChildContent>
+                                <RadzenSplitButtonItem Text="Import from repo" Value="import"/>
+                            </ChildContent>
+                        </RadzenSplitButton>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <RadzenCard class="w-100 mx-0">
+        @if (UpdatedText == EUpdatedText.Formatted)
+        {
+            <span>@((MarkupString) conventionViewModel.SelectedConvention.FormattedText.Text)</span>
+        }
+        @if (UpdatedText == EUpdatedText.Formal)
+        {
+            <span>@((MarkupString) conventionViewModel.FormalText)</span>
+        }
+    </RadzenCard>
+</div>
+
+@code
+{
+    [Parameter]
+    public EUpdatedText UpdatedText { get; set; }
+
+    public bool IsDialogOpen { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        conventionViewModel.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(conventionViewModel.SelectedConvention)) StateHasChanged();
+            if (e.PropertyName == nameof(conventionViewModel.FormalText)) StateHasChanged();
+        };
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task ViewHistory()
+    {
+        try
+        {
+            if (!IsDialogOpen)
+            {
+                IsDialogOpen = true;
+                if (UpdatedText == EUpdatedText.Formatted)
+                {
+                    await dialogService.OpenAsync("Description History", ds => @<HistoryUpdatedTextDialog DialogService="ds" UpdatedText="@UpdatedText"/>);
+                }
+
+                if (UpdatedText == EUpdatedText.Formal)
+                {
+                    await dialogService.OpenAsync("Properties History", ds => @<HistoryUpdatedTextDialog DialogService="ds" UpdatedText="@UpdatedText"/>);
+                }
+            }
+        }
+        finally
+        {
+            IsDialogOpen = false;
+        }
+    }
+
+    private async Task Edit(RadzenSplitButtonItem item)
+    {
+        try
+        {
+            if (!IsDialogOpen)
+            {
+                IsDialogOpen = true;
+                if (UpdatedText == EUpdatedText.Formatted)
+                {
+                    var result = await dialogService.OpenAsync("Edit Description", ds => @<EditUpdatedTextDialog DialogService="ds" Input="@conventionViewModel.SelectedConvention.FormattedText.Text" UpdatedText="@UpdatedText"/>);
+                    if (result is string text)
+                        await conventionViewModel.UpdateFormattedText(text);
+                }
+
+                if (UpdatedText == EUpdatedText.Formal)
+                {
+                    if (item?.Value == null)
+                    {
+                        var result = await dialogService.OpenAsync("Edit Properties", ds => @<EditUpdatedTextDialog DialogService="ds" Input="@conventionViewModel.SelectedConvention.FormalText.Text" UpdatedText="@UpdatedText"/>);
+                        if (result is string text)
+                            await conventionViewModel.UpdateFormalText(text);
+                    }
+                    if (item?.Value == "import")
+                    {
+                        await dialogService.OpenAsync("Import from Repository", ds => @<ImportFromRepoDialog DialogService="ds"></ImportFromRepoDialog>);
+                    }
+                }
+            }
+        }
+        finally
+        {
+            IsDialogOpen = false;
+        }
+    }
+}

@@ -1,0 +1,139 @@
+﻿@page "/repository/{owner}/{repositoryName}"
+
+@inject RepositoryViewModel repositoryViewModel
+@inject UserViewModel userViewModel
+@inject NavigationManager navigationManager
+@inject DialogService dialogService
+
+@attribute [Authorize]
+
+<Loader IsLoaded="@IsLoaded">
+    <div class="row">
+        <div class="col">
+            <h1>@RepositoryName conventions</h1>
+        </div>
+        <div class="col">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <div class="mr-2 mb-1">
+                    <div class="row">
+                        <div class="col">
+                            <RadzenButton Style="margin-right: 6px" class="w-100" Text="Add" Click="@AddConvention" Icon="add"></RadzenButton>
+                        </div>
+                        <div class="col pl-0">
+                            <RadzenSplitButton Style="margin-right: 6px" class="w-100" Text="Check" Click="@Check" Icon="remove_red_eye">
+                                <ChildContent>
+                                    <RadzenSplitButtonItem Text="History" Value="history" />
+                                </ChildContent>
+                            </RadzenSplitButton>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-grow-1">
+                    <RadzenAutoComplete Data="@repositoryViewModel.AllConventions" TextProperty="Title" FilterOperator="StringFilterOperator.Contains" Placeholder="Search..." Class="w-100" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterDelay="100" Change="@(OnChange)"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div hidden="@(!repositoryViewModel.VisibleConventions.Any())">
+        <ConventionsListComponent></ConventionsListComponent>
+
+    </div>
+    <p hidden="@(repositoryViewModel.VisibleConventions.Any())">Sorry, there are no conventions to show.</p>
+    <RadzenPager Count="repositoryViewModel.FilteredConventions.Count()" PageSize="@repositoryViewModel.PageSize" PageChanged="@PageChanged" @ref="Pager"/>
+</Loader>
+
+@code {
+
+    [Parameter]
+    public string Owner { get; set; }
+
+    [Parameter]
+    public string RepositoryName { get; set; }
+
+    public bool IsLoaded { get; set; }
+
+    public RadzenPager Pager { get; set; }
+
+    public bool IsDialogOpen { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        repositoryViewModel.PropertyChanged += (_, e) =>
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(repositoryViewModel.AllConventions):
+                case nameof(repositoryViewModel.VisibleConventions):
+                case nameof(repositoryViewModel.FilteredConventions):
+                case nameof(repositoryViewModel.PageSize):
+                    StateHasChanged();
+                    break;
+            }
+        };
+
+        await repositoryViewModel.SetSelectedRepository(Owner, RepositoryName);
+
+        await base.OnInitializedAsync();
+        IsLoaded = true;
+    }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+
+        if (!await userViewModel.HasAccessToRepository(Owner, RepositoryName))
+            navigationManager.NavigateTo("notfound");
+    }
+
+    private void PageChanged(PagerEventArgs args)
+    {
+        repositoryViewModel.VisibleConventions = repositoryViewModel.FilteredConventions.Skip(args.Skip).Take(args.Top).ToList();
+    }
+
+    private void OnChange(object value)
+    {
+        if (value is not string stringValue)
+            throw new ArgumentOutOfRangeException(nameof(value));
+        repositoryViewModel.FilteredConventions = repositoryViewModel.AllConventions.Where(c => c.Title.ToLower().Contains(stringValue.ToLower())).ToList();
+    }
+
+    private async Task AddConvention()
+    {
+        try
+        {
+            if (!IsDialogOpen)
+            {
+                IsDialogOpen = true;
+                var result = await dialogService.OpenAsync("Add Convention", ds => @<TitleDialog DialogService="ds"/>);
+                if (result is string title)
+                    await repositoryViewModel.AddConvention(title);
+                await Pager.FirstPage();
+            }
+        }
+        finally
+        {
+            IsDialogOpen = false;
+        }
+    }
+
+    private async Task Check(RadzenSplitButtonItem item)
+    {
+        try
+        {
+            if (!IsDialogOpen)
+            {
+                IsDialogOpen = true;
+                if (item?.Value == null)
+                    await dialogService.OpenAsync("Check Conventions", ds => @<CheckConventionsDialog DialogService="ds"/>);
+
+                if (item?.Value == "history")
+                    await dialogService.OpenAsync("Checks History", ds => @<ChecksHistoryDialog DialogService="ds"></ChecksHistoryDialog>);
+            }
+        }
+        finally
+        {
+            IsDialogOpen = false;
+        }
+    }
+
+}

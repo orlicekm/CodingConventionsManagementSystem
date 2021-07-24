@@ -1,0 +1,17 @@
+﻿<div>
+    <div hidden="@IsLoaded">
+        <h1>Loading...</h1>
+        <p>Loading page content, please wait...</p>
+    </div>
+    <div hidden="@(!IsLoaded)">@ChildContent</div>
+</div>
+
+@code {
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool IsLoaded { get; set; }
+
+}

@@ -1,0 +1,60 @@
+﻿@page "/Properties"
+@inject IJSRuntime js
+@inject PropertiesViewModel propertiesViewModel
+
+
+<h1>Supported Properties</h1>
+<RadzenDataList AllowPaging="false" WrapItems="true" Data="@propertiesViewModel.Properties" TItem="IProperty">
+    <Template Context="property">
+        <RadzenCard class="w-100 mx-0">
+            <div class="row">
+                <div class="col">
+                    <RadzenLabel class="h5 mb-0" Text="@property.Name"></RadzenLabel>
+                    <span class="badge badge-success" hidden="@(property is not ICheckable)">Can be checked</span>
+                    <span class="badge badge-success" hidden="@(property is not IImportable)">Can be imported</span>
+                    <span class="badge badge-danger" hidden="@(property is ICheckable)">Cannot be checked</span>
+                    <span class="badge badge-danger" hidden="@(property is IImportable)">Cannot be imported</span>
+                </div>
+            </div>
+            <div class="row text-muted">
+                <div class="col-auto">
+                    <p class="text-muted" hidden="@property.Description.ToVisible()" style="white-space: pre-line">@property.Description</p>
+                </div>
+            </div>
+            @if (property is ICheckable checkableProperty)
+            {
+                <div class="row text-muted">
+                    <div class="col-auto" hidden="@checkableProperty.AllowedFileTypes.ToVisible()" data-toggle="tooltip" data-placement="bottom" title="Allowed files">
+                        <div class="d-flex align-content-center align-items-center">
+                            <FileQuestionImage></FileQuestionImage>
+                            @checkableProperty.AllowedFileTypes
+                        </div>
+                    </div>
+                    <div class="col-auto" hidden="@checkableProperty.AllowedValues.ToVisible()">
+                        <div class="d-flex align-content-center align-items-center" data-toggle="tooltip" data-placement="bottom" title="Allowed values">
+                            <CabinetImage></CabinetImage>
+                            @AddUnset(checkableProperty.AllowedValues)
+                        </div>
+                    </div>
+                </div>
+            }
+        </RadzenCard>
+    </Template>
+</RadzenDataList>
+
+@code
+{
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await js.InvokeVoidAsync("addTooltips");
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    private object AddUnset(string allowedValues)
+    {
+        return $"{allowedValues} or \"unset\"";
+    }
+}

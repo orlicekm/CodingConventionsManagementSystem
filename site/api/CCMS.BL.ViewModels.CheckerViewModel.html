@@ -1,0 +1,665 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class CheckerViewModel
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class CheckerViewModel
+   ">
+    <meta name="generator" content="docfx 2.58.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="CCMS.BL.ViewModels.CheckerViewModel">
+  
+  
+  <h1 id="CCMS_BL_ViewModels_CheckerViewModel" data-uid="CCMS.BL.ViewModels.CheckerViewModel" class="text-break">Class CheckerViewModel
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="CCMS.BL.ViewModels.Base.BaseViewModel.html">BaseViewModel</a></div>
+    <div class="level2"><span class="xref">CheckerViewModel</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="CCMS.BL.ViewModels.Base.IViewModel.html">IViewModel</a></div>
+    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+    <div><a class="xref" href="CCMS.BL.Configurator.IScoped.html">IScoped</a></div>
+    <div><span class="xref">System.IDisposable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="CCMS.BL.ViewModels.Base.BaseViewModel.html#CCMS_BL_ViewModels_Base_BaseViewModel_PropertyChanged">BaseViewModel.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="CCMS.BL.ViewModels.Base.BaseViewModel.html#CCMS_BL_ViewModels_Base_BaseViewModel_OnPropertyChanged_System_String_">BaseViewModel.OnPropertyChanged(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="CCMS.BL.ViewModels.Base.BaseViewModel.html#CCMS_BL_ViewModels_Base_BaseViewModel_SetPropertyValue__1___0____0_System_String_">BaseViewModel.SetPropertyValue&lt;T&gt;(T, T, String)</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="CCMS.BL.ViewModels.html">CCMS.BL.ViewModels</a></h6>
+  <h6><strong>Assembly</strong>: CCMS.BL.dll</h6>
+  <h5 id="CCMS_BL_ViewModels_CheckerViewModel_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class CheckerViewModel : BaseViewModel, IViewModel, INotifyPropertyChanged, IScoped, IDisposable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel__ctor_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.#ctor*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel__ctor_GalaSoft_MvvmLight_Messaging_IMessenger_System_IServiceProvider_CCMS_BL_Services_Database_CheckDataService_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.#ctor(GalaSoft.MvvmLight.Messaging.IMessenger,System.IServiceProvider,CCMS.BL.Services.Database.CheckDataService)">CheckerViewModel(IMessenger, IServiceProvider, CheckDataService)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CheckerViewModel(IMessenger messenger, IServiceProvider serviceProvider, CheckDataService checkDataService)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">GalaSoft.MvvmLight.Messaging.IMessenger</span></td>
+        <td><span class="parametername">messenger</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.IServiceProvider</span></td>
+        <td><span class="parametername">serviceProvider</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="CCMS.BL.Services.Database.CheckDataService.html">CheckDataService</a></td>
+        <td><span class="parametername">checkDataService</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_CancellationTokenSource" data-uid="CCMS.BL.ViewModels.CheckerViewModel.CancellationTokenSource">CancellationTokenSource</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CancellationTokenSource CancellationTokenSource</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationTokenSource</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_AccessToken_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.AccessToken*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_AccessToken" data-uid="CCMS.BL.ViewModels.CheckerViewModel.AccessToken">AccessToken</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string AccessToken { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_AllChecks_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.AllChecks*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_AllChecks" data-uid="CCMS.BL.ViewModels.CheckerViewModel.AllChecks">AllChecks</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;RepositoryCheckListModel&gt; AllChecks { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.ICollection</span>&lt;<a class="xref" href="CCMS.BL.Models.List.RepositoryCheckListModel.html">RepositoryCheckListModel</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_Checker_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.Checker*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_Checker" data-uid="CCMS.BL.ViewModels.CheckerViewModel.Checker">Checker</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Checker Checker { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="CCMS.BL.Services.EditorConfig.Check.Checker.html">Checker</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_ExecuteMessages_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.ExecuteMessages*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_ExecuteMessages" data-uid="CCMS.BL.ViewModels.CheckerViewModel.ExecuteMessages">ExecuteMessages</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ObservableCollection&lt;ExecuteMessageObservable&gt; ExecuteMessages { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.ObservableCollection</span>&lt;<a class="xref" href="CCMS.BL.ViewModels.Observables.ExecuteMessageObservable.html">ExecuteMessageObservable</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_NextStepAllowed_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.NextStepAllowed*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_NextStepAllowed" data-uid="CCMS.BL.ViewModels.CheckerViewModel.NextStepAllowed">NextStepAllowed</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool NextStepAllowed { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_PageSize_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.PageSize*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_PageSize" data-uid="CCMS.BL.ViewModels.CheckerViewModel.PageSize">PageSize</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int PageSize { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_Results_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.Results*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_Results" data-uid="CCMS.BL.ViewModels.CheckerViewModel.Results">Results</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;ConventionCheckListModel&gt; Results { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.ICollection</span>&lt;<a class="xref" href="CCMS.BL.Models.List.ConventionCheckListModel.html">ConventionCheckListModel</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_SelectedBranch_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.SelectedBranch*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_SelectedBranch" data-uid="CCMS.BL.ViewModels.CheckerViewModel.SelectedBranch">SelectedBranch</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string SelectedBranch { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_SelectedConventions_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.SelectedConventions*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_SelectedConventions" data-uid="CCMS.BL.ViewModels.CheckerViewModel.SelectedConventions">SelectedConventions</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;ConventionListModel&gt; SelectedConventions { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="CCMS.BL.Models.List.ConventionListModel.html">ConventionListModel</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_SelectedRepository_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.SelectedRepository*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_SelectedRepository" data-uid="CCMS.BL.ViewModels.CheckerViewModel.SelectedRepository">SelectedRepository</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RepositoryDetailModel SelectedRepository { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="CCMS.BL.Models.Detail.RepositoryDetailModel.html">RepositoryDetailModel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_SelectedUser_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.SelectedUser*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_SelectedUser" data-uid="CCMS.BL.ViewModels.CheckerViewModel.SelectedUser">SelectedUser</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserListModel SelectedUser { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="CCMS.BL.Models.List.UserListModel.html">UserListModel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_Step_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.Step*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_Step" data-uid="CCMS.BL.ViewModels.CheckerViewModel.Step">Step</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Step { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_VisibleCheck_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.VisibleCheck*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_VisibleCheck" data-uid="CCMS.BL.ViewModels.CheckerViewModel.VisibleCheck">VisibleCheck</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;RepositoryCheckListModel&gt; VisibleCheck { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.ICollection</span>&lt;<a class="xref" href="CCMS.BL.Models.List.RepositoryCheckListModel.html">RepositoryCheckListModel</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_Close_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.Close*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_Close" data-uid="CCMS.BL.ViewModels.CheckerViewModel.Close">Close()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Close()</code></pre>
+  </div>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_Dispose_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.Dispose*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_Dispose" data-uid="CCMS.BL.ViewModels.CheckerViewModel.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_Reset_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.Reset*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_Reset" data-uid="CCMS.BL.ViewModels.CheckerViewModel.Reset">Reset()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Reset()</code></pre>
+  </div>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_SelectedConventionsChanged_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.SelectedConventionsChanged*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_SelectedConventionsChanged" data-uid="CCMS.BL.ViewModels.CheckerViewModel.SelectedConventionsChanged">SelectedConventionsChanged()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SelectedConventionsChanged()</code></pre>
+  </div>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_StepChanged_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.StepChanged*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_StepChanged_System_Int32_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.StepChanged(System.Int32)">StepChanged(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StepChanged(int s)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">s</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="CCMS_BL_ViewModels_CheckerViewModel_UpdateChecksHistory_" data-uid="CCMS.BL.ViewModels.CheckerViewModel.UpdateChecksHistory*"></a>
+  <h4 id="CCMS_BL_ViewModels_CheckerViewModel_UpdateChecksHistory" data-uid="CCMS.BL.ViewModels.CheckerViewModel.UpdateChecksHistory">UpdateChecksHistory()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public async Task UpdateChecksHistory()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="CCMS.BL.ViewModels.Base.IViewModel.html">IViewModel</a>
+  </div>
+  <div>
+      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
+  </div>
+  <div>
+      <a class="xref" href="CCMS.BL.Configurator.IScoped.html">IScoped</a>
+  </div>
+  <div>
+      <span class="xref">System.IDisposable</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

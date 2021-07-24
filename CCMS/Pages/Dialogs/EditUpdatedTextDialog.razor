@@ -1,0 +1,71 @@
+﻿@inject UserViewModel userViewModel
+
+<RadzenTemplateForm TItem="DialogData" Data="@Data" Submit="@OnSubmit">
+    @if (UpdatedText == EUpdatedText.Formatted)
+    {
+        <RadzenHtmlEditor style="height: 400px;" @bind-Value=@Data.Text>
+            <RadzenHtmlEditorBold/>
+            <RadzenHtmlEditorItalic/>
+            <RadzenHtmlEditorUnderline/>
+            <RadzenHtmlEditorStrikeThrough/>
+            <RadzenHtmlEditorSeparator/>
+            <RadzenHtmlEditorUnorderedList/>
+            <RadzenHtmlEditorOrderedList/>
+            <RadzenHtmlEditorSeparator/>
+            <RadzenHtmlEditorColor/>
+            <RadzenHtmlEditorBackground/>
+            <RadzenHtmlEditorRemoveFormat/>
+            <RadzenHtmlEditorSeparator/>
+            <RadzenHtmlEditorLink/>
+            <RadzenHtmlEditorUnlink/>
+        </RadzenHtmlEditor>
+    }
+    @if (UpdatedText == EUpdatedText.Formal)
+    {
+        <RadzenTextArea class="w-100" Style="height: 400px" @bind-Value="@Data.Text"/>
+    }
+    <div class="text-right mt-2">
+        <RadzenButton Text="Save" Style="margin-bottom: 10px; width: 150px" Image="images/save.png" ButtonType="ButtonType.Submit"/>
+        <RadzenButton Text="Cancel" Click="Close" ButtonStyle="ButtonStyle.Light" Image="images/close.png" Style="margin-bottom: 10px; width: 150px"/>
+    </div>
+</RadzenTemplateForm>
+
+
+@code {
+
+    [Parameter]
+    public EUpdatedText UpdatedText { get; set; }
+
+    [Parameter]
+    public DialogService DialogService { get; set; }
+
+    [Parameter]
+    public string Input { get; set; }
+
+    public bool IsClosed { get; set; }
+
+    protected class DialogData
+    {
+        public string Text { get; set; } = string.Empty;
+    }
+
+    DialogData Data { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        Data.Text = Input;
+        base.OnInitialized();
+    }
+
+    private void OnSubmit()
+    {
+        DialogService.Close(Data.Text);
+    }
+
+    private void Close()
+    {
+        if (IsClosed) return;
+        IsClosed = true;
+        DialogService.Close();
+    }
+}

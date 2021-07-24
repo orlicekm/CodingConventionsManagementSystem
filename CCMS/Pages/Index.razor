@@ -1,0 +1,57 @@
+﻿@page "/"
+
+@inject NavigationManager navigationManager
+@inject RepositoryViewModel repositoryViewModel
+@inject UserViewModel userViewModel
+
+<AuthorizeView>
+    <Authorized>
+        <h1>Welcome @userViewModel.SelectedUser?.Name</h1>
+        <p>
+            You can manage coding conventions by choosing GitHub repository. <br/>
+            <RadzenButton Click="@NavigateToRepositories" Text="Repositories" Icon="inventory" ButtonStyle="ButtonStyle.Secondary"/>
+        </p>
+        @if (repositoryViewModel.SelectedRepository != null)
+        {
+            <p>
+                Otherwise you can manage conventions for selected repository. <br/>
+                <RadzenButton Click="@NavigateToConventions" Text="Conventions" Icon="list" ButtonStyle="ButtonStyle.Secondary"/>
+            </p>
+        }
+    </Authorized>
+    <NotAuthorized>
+        <h1>Welcome to Coding Conventions Management System</h1>
+        <p>You need to sign in to manage coding conventions.</p>
+        <AccessControl></AccessControl>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        userViewModel.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(userViewModel.SelectedUser)) StateHasChanged();
+        };
+
+        repositoryViewModel.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(repositoryViewModel.SelectedRepository)) StateHasChanged();
+        };
+
+        await base.OnInitializedAsync();
+    }
+
+    private void NavigateToRepositories()
+    {
+        navigationManager.NavigateTo("repositories");
+    }
+
+    private void NavigateToConventions()
+    {
+        navigationManager.NavigateTo($"repository/{repositoryViewModel.SelectedRepository}");
+    }
+
+}

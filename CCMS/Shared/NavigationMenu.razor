@@ -1,0 +1,33 @@
+﻿@inject RepositoryViewModel repositoryViewModel
+@inject NavigationManager navigationManager
+
+<RadzenPanelMenu style="height: 100%">
+    <RadzenPanelMenuItem Text="Home" Path="/" Icon="home"></RadzenPanelMenuItem>
+    <RadzenPanelMenuItem Text="Repositories" Path="repositories" Icon="inventory"></RadzenPanelMenuItem>
+    <RadzenPanelMenuItem Selected="IsConventionsSelected" Text="Conventions" Path="@SelectedRepositoryPath" Icon="list"></RadzenPanelMenuItem>
+    <RadzenPanelMenuItem Text="Properties" Path="properties" Icon="receipt_long"></RadzenPanelMenuItem>
+</RadzenPanelMenu>
+
+
+@code
+{
+    private string SelectedRepositoryPath => $"repository/{repositoryViewModel.SelectedRepository?.FullName}";
+
+    protected override async Task OnInitializedAsync()
+    {
+        repositoryViewModel.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(repositoryViewModel.SelectedRepository))
+                StateHasChanged();
+        };
+        navigationManager.LocationChanged += (_, e) =>
+        {
+            if (navigationManager.ToBaseRelativePath(e.Location) == SelectedRepositoryPath)
+                StateHasChanged();
+        };
+
+        await base.OnInitializedAsync();
+    }
+
+    public bool IsConventionsSelected => SelectedRepositoryPath == navigationManager.ToBaseRelativePath(navigationManager.Uri);
+}

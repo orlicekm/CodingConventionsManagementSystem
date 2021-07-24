@@ -1,0 +1,462 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/Repositories/ccms/CCMS.BL",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Base.ICheckable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Base.ICheckable.html",
+          "hash": "KHUw8pVB8MA7cf/9cciux//qzqLi9A2XutY2STXhphk="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Base.IImportable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Base.IImportable.html",
+          "hash": "fA0GEbuEseJSDPhafrefuQTGVIK9ua9sFEcWeXfhgFM="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Base.IProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Base.IProperty.html",
+          "hash": "fhGI1QKPDOZ2XtWiCxiUOQKhMFdFCzaXWNundiTiWyw="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Base.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Base.html",
+          "hash": "D/Ys75SCqh/3+Wk4myfH0cmzDwZeX8+mRRR6FLzCcRw="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Csharp.CsharpNewLineBeforeCatchProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Csharp.CsharpNewLineBeforeCatchProperty.html",
+          "hash": "x5Ooqmp5JWyDK67sklwYpputAaf4hf+SpIxaurTWnc0="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Csharp.CsharpNewLineBeforeElseProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Csharp.CsharpNewLineBeforeElseProperty.html",
+          "hash": "PjEV7XfTo/JhmS6VfFE1UyOpCIbJyyRp0XmucI5bR7w="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Csharp.CsharpNewLineBeforeFinallyProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Csharp.CsharpNewLineBeforeFinallyProperty.html",
+          "hash": "3AUIxqQEBXI2s+31EGd3GGkJ4Yf521qftAVz+6nzNug="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Csharp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Csharp.html",
+          "hash": "RDNY44mKUWZWlRkivye3fm/GpQLMDrxcxTgWRiSJb7I="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.CharsetProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.CharsetProperty.html",
+          "hash": "4SrwV/xzRt3B2c5T4DcHX1CXKUGise4uz1gbzUR1p1Y="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.EndOfLineProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.EndOfLineProperty.html",
+          "hash": "3bz1xA+VWnb+ENTQ0Pny6TZ8Iyk2IlKZtPBjZSu1Aso="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.Enums.EBool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.Enums.EBool.html",
+          "hash": "Xzg9K8JaIhxEnnY92vC6Vbv2OhJZdDUkZgG29MNyKeQ="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.Enums.ECharset.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.Enums.ECharset.html",
+          "hash": "gTNzUbw1Ct4k4/35sjssSkESvreCfCVBQ92YbMrb5aw="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.Enums.EEndOfLine.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.Enums.EEndOfLine.html",
+          "hash": "USHTwVzayaVyRKBi3zggwgr8DUj5/TzLA3MICsFvraw="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.Enums.EIndentStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.Enums.EIndentStyle.html",
+          "hash": "H9pIIxD0NB/WrOWq816jvDg4OvoRT80KM8ORi5vYV+k="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.Enums.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.Enums.html",
+          "hash": "MiTR8hh9eRi3HF6iynOBBNQmZeMZ6J9Qy6qWgUjvQyM="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.IndentSizeProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.IndentSizeProperty.html",
+          "hash": "icmxJI0koJsWu987O1nBSr9Ay41rGQYe01vTDevXTjI="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.IndentStyleProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.IndentStyleProperty.html",
+          "hash": "plPuKpzrxSCVeata/X0YtR/1WysIni/PSlWthx1k1MI="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.InsertFinalNewlineProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.InsertFinalNewlineProperty.html",
+          "hash": "1gKSxVtMjKccaZi5GgNxTenI/LCdDTfzRAgv0WEgkiM="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.TabWidthProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.TabWidthProperty.html",
+          "hash": "gSzPQZEwJuV1TZ0Xo27BGUgyQ6zppba2U3LTYAQFzoU="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.TrimTrailingWhitespaceProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.TrimTrailingWhitespaceProperty.html",
+          "hash": "L+D/3jBUdbVYr0L7JSXNA/B9bIa8QOyTUkfS6YICO/4="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Default.html",
+          "hash": "L/YCDk3U05gTmXp8OURzPsw/Qk10fvjuvNYANenTLXU="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Exceptions.BasePropertiesException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Exceptions.BasePropertiesException.html",
+          "hash": "b8vYoVmGB8RVFvC7P+9LfjGXyG9ddLBp69skHD4uw0A="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Exceptions.UnsupportedPropertyValueException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Exceptions.UnsupportedPropertyValueException.html",
+          "hash": "3kl8mCdNeZUlk7FsPIVG3cTPIct6SMmHkhCj0BXZ+HI="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Exceptions.html",
+          "hash": "d0fZ2A5OysE6HggTkblyGrZy4IIKMb/De/HkrpAlExs="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Helpers.PropertyExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Helpers.PropertyExtensions.html",
+          "hash": "eke/iIcJswUwzT0X7MNs2sdosqMBUJ61UuIJS9rzmeQ="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Helpers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Helpers.html",
+          "hash": "TgN0uEUaDh2Ic7gE1roT2fBZZ+AG1fZh8x2KYbZPv44="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "Ui/FugoDU0U/8PRSJ4jn3JjqOKcK35MPoXwAzSaY+u4="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "1YESg2GeGn1WU1xbvdi6nLUZTzWcrUFxgnzBTU0tiQA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/deployment.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/deployment.html",
+          "hash": "yeGxMmqP1iIK1BymxdTCZ45+1fHV5uhDs/RrZ0X7GyA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "YEAEuGI7ZUlD3flGfdZf6KAwwV/4mTS3pTzxQI3oeV8="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/properties.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/properties.html",
+          "hash": "JgVRNlR8IFEteegvkHzFhXmnrexOq81FfS8fikOU1Uk="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "hZRcLJSzEfBjr7e80QpKxsRB0HJD4MM8BF3QJUuQuiw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "FESPAKu26BnT38G/r4jzwlzZxC3zkpOEfHAGOMWnSUg="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "Oa9PuD4E1hvZnCkVjUgzNBX6S00Zo5YilamTERTZo54="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 5,
+          "skipped_file_count": 4
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 26,
+          "skipped_file_count": 26
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

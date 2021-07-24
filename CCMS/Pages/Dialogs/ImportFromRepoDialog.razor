@@ -1,0 +1,189 @@
+﻿@inject RepositoryViewModel repositoryViewModel
+@inject PropertiesViewModel propertiesViewModel
+@inject ConventionViewModel conventionViewModel
+@inject ImportViewModel importViewModel
+
+<Loader IsLoaded="@IsLoaded">
+    <RadzenSteps Change="s => importViewModel.StepChanged(s)">
+        <Steps>
+            <RadzenStepsItem Text="Settings" Disabled="@(!(importViewModel.Step == -1 && importViewModel.NextStepAllowed))">
+                <RadzenCard class="overflow-auto mb-2" style="height: 400px">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <RadzenLabel Text="Import"/>
+                            <RadzenRadioButtonList @bind-Value="@importViewModel.Append" TValue="bool">
+                                <Items>
+                                    <RadzenRadioButtonListItem Text="Append text" Value="true"/>
+                                    <RadzenRadioButtonListItem Text="Replace text" Value="false"/>
+                                </Items>
+                            </RadzenRadioButtonList>
+                        </div>
+                        <div class="col">
+                            <RadzenLabel Text="Branch"/><br/>
+                            <RadzenDropDown TValue="string" AllowVirtualization="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                            AllowFiltering="true" Data="@Branches" TextProperty="Name" ValueProperty="Name" @bind-Value="@importViewModel.SelectedBranch"/>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <RadzenLabel Text="Conventions (name and section)"/><br/>
+                    </div>
+                    <RadzenDataList Data="@importViewModel.Properties" WrapItems="true" TItem="ValuablePropertyObservable">
+                        <Template Context="property">
+                            <div class="row w-100 border-0 m-0 p-0 mx-n3 justify-content-md-center shadow-none">
+                                <div class="col-auto px-1">
+                                    <RadzenDropDown TValue="string" AllowVirtualization="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    AllowFiltering="true" Data="@propertiesViewModel.ImportableProperties" TextProperty="Name" ValueProperty="Name" @bind-Value="@property.Name"/>
+                                </div>
+                                <div class="col-auto px-1">
+                                    <RadzenTextBox style="display: block" Name="" @bind-Value="@property.Value"/>
+                                </div>
+                                <div class="col-auto px-1">
+                                    <RadzenButton Icon="delete" Click="@(() => Delete(property))" ButtonStyle="ButtonStyle.Secondary"/>
+                                </div>
+                            </div>
+                        </Template>
+                    </RadzenDataList>
+
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <RadzenSplitButton Icon="add" Click="@(AddProperty)" class="w-100">
+                                <ChildContent>
+                                    <RadzenSplitButtonItem Text="One from each" Value="OneOfAll"/>
+                                </ChildContent>
+                            </RadzenSplitButton>
+
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </RadzenCard>
+            </RadzenStepsItem>
+            <RadzenStepsItem Text="Execution" Disabled="@(!(importViewModel.Step == 0 && importViewModel.NextStepAllowed))">
+                <RadzenCard class="overflow-auto mb-2" style="height: 400px">
+                    <RadzenDataList Data="@importViewModel.ExecuteMessages" WrapItems="true" TItem="ExecuteMessageObservable">
+                        <Template Context="executeMessage">
+                            <div class="d-flex align-content-center align-items-center border-0 m-1 p-0 w-100 shadow-none">
+                                <div class="text-center" hidden="@(executeMessage.State != ExecuteMessageObservable.EState.Running)" style="height: 24px; width: 24px">
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                </div>
+                                <div hidden="@(executeMessage.State != ExecuteMessageObservable.EState.Success)" style="height: 24px; width: 24px">
+                                    <SuccessCircleImage></SuccessCircleImage>
+                                </div>
+                                <div hidden="@(executeMessage.State != ExecuteMessageObservable.EState.Fail)" style="height: 24px; width: 24px">
+                                    <FailCircleImage></FailCircleImage>
+                                </div>
+                                <p class="pl-1">@executeMessage.Text</p>
+                            </div>
+                        </Template>
+                    </RadzenDataList>
+                </RadzenCard>
+            </RadzenStepsItem>
+            <RadzenStepsItem Text="Results" Disabled="@(!(importViewModel.Step == 1 && importViewModel.NextStepAllowed))">
+                <RadzenCard class="overflow-auto mb-2" style="height: 400px">
+                    <RadzenDataList Data="@importViewModel.Results" WrapItems="true" TItem="ImportResultObservable">
+                        <Template Context="result">
+                            <div class="row w-100 border-0 m-0 p-0 shadow-none mb-2">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="pl-1">
+                                                @result.Property.Name <b class="text-primary">[@result.Property.Value]</b>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <RadzenRadioButtonList @bind-Value="@result.SelectedValue" Data="@result.ImportValues" TextProperty="Text" ValueProperty="Section" TValue="string">
+                                    </RadzenRadioButtonList>
+                                </div>
+                            </div>
+                        </Template>
+                    </RadzenDataList>
+                </RadzenCard>
+            </RadzenStepsItem>
+        </Steps>
+    </RadzenSteps>
+
+
+    <div class="text-right mt-2">
+        <RadzenButton Text="Save" Click="Save" Image="images/save.png" Visible="importViewModel.Step == 2" Style="margin-bottom: 10px; width: 150px"/>
+        <RadzenButton Text="Cancel" Click="Close" ButtonStyle="ButtonStyle.Light" Image="images/close.png" Style="margin-bottom: 10px; width: 150px"/>
+    </div>
+</Loader>
+
+
+@code {
+
+    [Parameter]
+    public DialogService DialogService { get; set; }
+
+    public bool IsLoaded { get; set; }
+
+    public bool IsClosed { get; set; }
+
+    private ICollection<BranchListModel> Branches { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        importViewModel.PropertyChanged += (_, e) =>
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(importViewModel.Append):
+                case nameof(importViewModel.SelectedBranch):
+                case nameof(importViewModel.ExecuteMessages):
+                case nameof(importViewModel.Properties):
+                case nameof(importViewModel.NextStepAllowed):
+                case nameof(importViewModel.Step):
+                    StateHasChanged();
+                    break;
+            }
+        };
+
+        importViewModel.ExecuteMessages.CollectionChanged += (_, _) => StateHasChanged();
+
+        importViewModel.Reset();
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            Branches = await repositoryViewModel.GetBranches();
+            importViewModel.SelectedBranch = Branches.FirstOrDefault()?.Name;
+            AddProperty(null);
+            IsLoaded = true;
+            StateHasChanged();
+        }
+    }
+
+    private void Close()
+    {
+        if (IsClosed) return;
+        IsClosed = true;
+        importViewModel.Close();
+        DialogService.Close();
+    }
+
+    private void AddProperty(RadzenSplitButtonItem item)
+    {
+        if (item?.Value == null)
+            importViewModel.AddProperty(propertiesViewModel.ImportableProperties);
+        if (item?.Value == "OneOfAll")
+            importViewModel.AddOneOfAllProperties(propertiesViewModel.ImportableProperties);
+    }
+
+    private void Delete(ValuablePropertyObservable property)
+    {
+        importViewModel.DeleteProperty(property);
+    }
+
+    private async Task Save()
+    {
+        var text = await importViewModel.Save(conventionViewModel.SelectedConvention.FormalText.Text);
+        await conventionViewModel.UpdateFormalText(text);
+        importViewModel.Close();
+        DialogService.Close();
+    }
+
+}

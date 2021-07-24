@@ -1,0 +1,102 @@
+﻿@page "/convention/{id}"
+
+@inject UserViewModel userViewModel
+@inject ConventionViewModel conventionViewModel
+@inject NavigationManager navigationManager
+@inject DialogService dialogService
+
+@attribute [Authorize]
+
+<Loader IsLoaded="@IsLoaded">
+    <div class="row">
+        <div class="col">
+            <h1>@conventionViewModel.SelectedConvention.Title</h1>
+        </div>
+        <div class="col">
+            <div class="d-flex justify-content-end">
+                <div class="mr-2">
+                    <RadzenButton Style="margin-right: 4px; padding: initial; width: 110px;" Text="Rename" Click="@Edit" Icon="edit" ButtonStyle="ButtonStyle.Secondary"></RadzenButton>
+                </div>
+                <div>
+                    <RadzenButton Text="Remove" Click="@Remove" Icon="delete_outline" ButtonStyle="ButtonStyle.Danger" Style="padding: initial; width: 110px;"></RadzenButton>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-muted">
+        <label class="mr-1">Updated @conventionViewModel.SelectedConvention.UpdatedAt.ToLocalTime().DateTime.ToFriendlyTimeSpan() by </label>
+        <a href="@conventionViewModel.SelectedConvention.UpdatedBy?.HtmlUrl" Style="color: rgb(13, 15, 16);">
+            <RadzenImage Path="@conventionViewModel.SelectedConvention.UpdatedBy?.AvatarUrl" Class="rounded-circle" Style="max-height: 20px;">
+            </RadzenImage>@conventionViewModel.SelectedConvention.UpdatedBy?.Login
+        </a>
+    </div>
+    <RadzenCard class="w-100 mx-0 mt-2">
+        <UpdatedTextComponent UpdatedText="EUpdatedText.Formatted"></UpdatedTextComponent>
+        <UpdatedTextComponent UpdatedText="EUpdatedText.Formal"></UpdatedTextComponent>
+    </RadzenCard>
+    <RadzenCard class="w-100 mx-0 mt-2">
+        <CommentsComponent></CommentsComponent>
+    </RadzenCard>
+</Loader>
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; }
+
+    public bool IsLoaded { get; set; }
+
+    public bool IsDialogOpen { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        conventionViewModel.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(conventionViewModel.SelectedConvention)) StateHasChanged();
+        };
+
+        await base.OnInitializedAsync();
+        IsLoaded = true;
+    }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+
+        if (!Guid.TryParse(Id, out var id))
+            navigationManager.NavigateTo("notfound");
+        if (!await conventionViewModel.SetSelectedConvention(id))
+            navigationManager.NavigateTo("notfound");
+        if (!await userViewModel.HasAccessToConvention(conventionViewModel.SelectedConvention))
+            navigationManager.NavigateTo("notfound");
+    }
+
+    private async Task Edit()
+    {
+        try
+        {
+            if (!IsDialogOpen)
+            {
+                IsDialogOpen = true;
+                var result = await dialogService.OpenAsync("Rename Title", ds => @<TitleDialog DialogService="ds" Input="@conventionViewModel.SelectedConvention.Title"/>);
+                if (result is string title)
+                    await conventionViewModel.UpdateTitle(title);
+            }
+        }
+        finally
+        {
+            IsDialogOpen = false;
+        }
+    }
+
+    private async Task Remove()
+    {
+        var result = await dialogService.Confirm("Are you sure you want to delete this convention?", "Convention Delete", new ConfirmOptions {OkButtonText = "Delete", CancelButtonText = "Cancel"});
+        if (result is true)
+        {
+            navigationManager.NavigateTo($"/repository/{conventionViewModel.SelectedConvention.Repository.FullName}");
+            await conventionViewModel.DeleteSelectedConvention();
+        }
+    }
+
+}
