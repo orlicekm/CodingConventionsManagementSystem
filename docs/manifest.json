@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "D:/Repositories/ccms/ccms.bl",
+  "source_base_path": "D:/Repositories/CodingConventionsManagementSystem/CCMS.BL",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -321,7 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "Ui/FugoDU0U/8PRSJ4jn3JjqOKcK35MPoXwAzSaY+u4="
+          "hash": "si2NKAoMIvMjjk8mg40fMJ1SmuQQNMWDNOgLFq2aJ6w="
         }
       },
       "is_incremental": false,
@@ -345,7 +345,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/deployment.html",
-          "hash": "VknsZ3KbMaHD4Qh3oDTXwos1vRDexsuAu+1YZR/i+zE="
+          "hash": "OS8nBUDOSEq1W1wXQiyBpL4wB8utWT1cWEV+Pn9Z0UM="
         }
       },
       "is_incremental": true,
@@ -357,7 +357,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "YEAEuGI7ZUlD3flGfdZf6KAwwV/4mTS3pTzxQI3oeV8="
+          "hash": "3urKR6B82610aCqJbcJQlKml3dm62hoIkNgHA2wxxDo="
         }
       },
       "is_incremental": true,
@@ -369,7 +369,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/properties.html",
-          "hash": "jb333KKoSCeg5hW+RKrvLQLmEwl3nP7cN2dSEXRvLW0="
+          "hash": "7LFrYRL0MP78D7bRYM4bH5YH9gr2TzdQDZA3+z3hZTs="
         }
       },
       "is_incremental": true,
@@ -393,7 +393,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "PyA8EDXDLvAeD1uT5cCgmJ62RuZJ3PZU+nxl/ekMgRk="
+          "hash": "YAPIykYCesKneG04QGbGkUVA6+tjG1xVR2Jh4x861XQ="
         }
       },
       "is_incremental": true,
