@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "D:/Repositories/CodingConventionsManagementSystem/CCMS.BL",
+  "source_base_path": "D:/Repositories/ccms/ccms.bl",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Base.ICheckable.html",
-          "hash": "KHUw8pVB8MA7cf/9cciux//qzqLi9A2XutY2STXhphk="
+          "hash": "k6BZtOpZ2ud+6kfHahLsZ472n3zQtxrGXvZHjowBn40="
         }
       },
       "is_incremental": false,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Base.IImportable.html",
-          "hash": "fA0GEbuEseJSDPhafrefuQTGVIK9ua9sFEcWeXfhgFM="
+          "hash": "KOcUQedr8UDNUCjFjoUuGqFfqXH5F/5qGqW55N37OTw="
         }
       },
       "is_incremental": false,
@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CCMS.BL.Services.EditorConfig.Properties.Base.IProperty.html",
-          "hash": "fhGI1QKPDOZ2XtWiCxiUOQKhMFdFCzaXWNundiTiWyw="
+          "hash": "xORrr6Ab4ltpblh3OruuGhEs4K+Z63zsbTwP7WQXzd0="
         }
       },
       "is_incremental": false,
@@ -321,7 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "si2NKAoMIvMjjk8mg40fMJ1SmuQQNMWDNOgLFq2aJ6w="
+          "hash": "Ui/FugoDU0U/8PRSJ4jn3JjqOKcK35MPoXwAzSaY+u4="
         }
       },
       "is_incremental": false,
@@ -345,7 +345,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/deployment.html",
-          "hash": "EXw/yFMZF4TGGr2p6rmhTTX5nHZTMT0eRtii5l4bgwo="
+          "hash": "VknsZ3KbMaHD4Qh3oDTXwos1vRDexsuAu+1YZR/i+zE="
         }
       },
       "is_incremental": true,
@@ -357,7 +357,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "3urKR6B82610aCqJbcJQlKml3dm62hoIkNgHA2wxxDo="
+          "hash": "YEAEuGI7ZUlD3flGfdZf6KAwwV/4mTS3pTzxQI3oeV8="
         }
       },
       "is_incremental": true,
@@ -369,7 +369,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/properties.html",
-          "hash": "yLs4KjYO/M7J7b0TF1D8ntpilGqcUnCwtwWjZo8slSM="
+          "hash": "jb333KKoSCeg5hW+RKrvLQLmEwl3nP7cN2dSEXRvLW0="
         }
       },
       "is_incremental": true,
@@ -393,7 +393,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "Lsr0hVsKnWZQGNio5RYOFs+ADFD7Hgz1RzqquxjeAE8="
+          "hash": "PyA8EDXDLvAeD1uT5cCgmJ62RuZJ3PZU+nxl/ekMgRk="
         }
       },
       "is_incremental": true,

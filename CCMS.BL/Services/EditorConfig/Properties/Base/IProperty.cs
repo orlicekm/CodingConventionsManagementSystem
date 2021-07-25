@@ -8,7 +8,7 @@ namespace CCMS.BL.Services.EditorConfig.Properties.Base
         /// <summary>Unique property name.</summary>
         public string Name { get; }
 
-        /// <summary>User-friendly description of property that will be showed in properties page.</summary>
+        /// <summary>User-friendly description of property that will be shown in properties page.</summary>
         public string Description { get; }
     }
 }
