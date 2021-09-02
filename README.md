@@ -3,4 +3,4 @@
 * [Web](https://ccms.orlicek.net/)
 * [Documentation](https://orlicekm.github.io/CodingConventionsManagementSystem/)
 * [Contact](mailto:michal@orlicek.net)
-* [Thesis](https://wis.fit.vutbr.cz/FIT/st/rp.php/rp/2020/DP/23487.pdf)
+* [Thesis](https://www.fit.vut.cz/study/thesis-file/23487/23487.pdf)
